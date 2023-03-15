@@ -1,8 +1,6 @@
-from crypt import methods
-from datetime import datetime
 from forms import IndexForm, SurveyForm, LastForm
 from app import app, recaptcha
-from flask import render_template, redirect, flash, url_for
+from flask import render_template, redirect, url_for
 import utils
 
 #For the Index Page
