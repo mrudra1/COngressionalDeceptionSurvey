@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block main %}
+<div id="content" class="main layout-2-col-left">
+    <div id="content1">
+        <h2>
+            About the Survey
+        </h2>
+        <p>
+            This is a survey to help label a public speech dataset as deceptive or truthful.
+            The following pages of the survey contain:
+            <ol>
+                <li>3 Tutorial Pages: It will give you an idea of how to take the survey</li>
+                <li>20 Survey Pages: These are the actual survey questions</li>
+            </ol>
+        </p>
+        <h2>
+            How to take the survey
+        </h2>
+        <p>
+            Each page of the survey presents you with a conversation. You read the conversation and indicate in the options below it whether you feel the witness is attempting to be deceptive in their answer. You also indicate how confident you feel regarding your assessment of the given conversation.
+        </p>
+        <h2>
+            What is deception?
+        </h2>
+        <p>
+            <b>"Deception occurs when communicators control the information contained in their messages to convey a meaning that departs from the truth as they know it".</b>
+            <br><br>As stated above, we can label a communication as deception if:
+            <ol>
+                <li>There is presence of <b>deliberate intent</b> to deceive</li>
+                <li>Communicator considers the information to be <b>untrue</b></li>
+                <li>It has a <b>purpose</b>, like, gain of esteem, respect, trust or material, or in order to evade judgement that is negative and/or harms them or what they represent.</li>
+                
+            </ol>
+            <br>
+            To continue to the next page, please press the button below.
+        </p>
+        <form method="post">
+            <input type="submit" value="Next" formaction="{{ url_for('tutorial', id=0, guid=guid) }}" onclick="log(this)" class="button">
+        </form>
+    </div>
+    <div id="asides">
+        <h2>
+            About Us
+        </h2>
+        <p>very breif description about us</p>
+    </div>
+</div>
+<script type="text/javascript">
+    function log(element) {
+        if ((element.id)!=='deception' && (element.id)!=='confidence'){
+            fetch('/log/'+element.id+'&{{ guid }}&definition&-1')
+        }
+    }
+</script>
+{% endblock %}

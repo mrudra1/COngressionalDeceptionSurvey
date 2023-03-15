@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block main %}
+{% include "dropdown.html" %}
+<div id="content" class="main layout-2-col-left">
+    <div id="content1">
+        <h2>Survey page {{ id-2 }} of 20</h2>
+        <b>Q:</b>{{ question }}<br><br>
+        <b>WITNESS:</b>{{ witness }}<br><br>
+        <form method="post">
+            {{ form.csrf_token() }}
+            {{ form.logFeild }}
+            <table>
+                <tr>
+                    <td colspan="5">{{ message1 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="5"><b>Do you think there is deception occuring on the part of the witness?</b></td>
+                </tr>
+                <tr align="center">
+                    {{ form.deception}}
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td colspan="5">{{ message2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="5"><b>How confident are you in the above answer?</b></td>
+                </tr>
+                <tr align="center">
+                    {{ form.confidence }}
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td colspan="2" class="cta">
+                        <!--<input type="submit" id=Previous value="Previous" formaction="{{ url_for('previous', id=id, guid=guid) }}" onclick="log(this)">-->{{
+                        form.previous(class_="button") }}
+                    </td>
+                    <td></td>
+                    <td colspan="2" align="right">{{ form.submit(class_="button") }}</td>
+                </tr>
+            </table>
+            {{ message }}
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function log(element) {
+        if ((element.id)!=='deception' && (element.id)!=='confidence'){
+            fetch('/log/'+element.id+'&{{ guid }}&survey&{{ id }}')
+        }
+    }
+</script>
+{% endblock %}

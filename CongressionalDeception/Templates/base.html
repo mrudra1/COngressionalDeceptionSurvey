@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://www.binghamton.edu/favicon.png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <title>Survey</title>
+</head>
+
+<body>
+    <!--Header
+    <header class="title">
+        <h1>
+            <img src="https://www.binghamton.edu/communications-and-marketing/img/logos/binghamton/png/BinghamtonU_white.png" alt="Binghamton University">
+            Deception in Public Speech
+        </h1>
+        <h4>
+            This is a research survey to aid in a crowd-sourced labeling of a dataset
+        </h4>
+    </header>-->
+    <header id="site-header" class="nav-bar">
+        <div class="title-area">
+            <div id="site-title">
+                <img src="https://www.binghamton.edu/assets/img/logo/binghamton-university.png" alt="Binghamton University: The State University of New York" class="iconography">
+                <!--<a href="https://www.binghamton.edu/">Binghamton University: The State University of New York</a>-->
+            </div>
+            <div id="section-header-inline">Deception in Public Speech
+            </div>
+        </div>
+    </header>
+    {% block main %}
+    {% endblock %}
+</body>
+
+</html>

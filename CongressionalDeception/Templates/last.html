@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block main %}
+<div id="content" class="main layout-2-col-left">
+    <div id="content1">
+        <h1>Thank you!!</h1>
+        <p>Thank you for taking the survey. Please feel free to leave us any feedback regarding the survey below. When you are donw, preess on the "I am done" button in order to be redirected to the Amazon Mechanical Turk HIT completion page.</p>
+<form method="post">
+    <br>
+    <table>
+        <tr>
+            <td colspan="4">
+                {{ form.feedback }}
+            </td>
+        </tr>
+        <tr> {{ message }} </tr>
+        <tr>
+            <td colspan="2" align="left"> {{ form.previous(class_="button") }} </td>
+            <td colspan="2" align="right"> {{ form.submit(class_="button") }} </td>
+        </tr>
+    </table>
+</form>
+<script type="text/javascript">
+    function log(element) {
+        if ((element.id)!=='deception' && (element.id)!=='confidence'){
+            fetch('/log/'+element.id+'&{{ guid }}&last&{{ id }}')
+        }
+    }
+</script>
+{% endblock %}

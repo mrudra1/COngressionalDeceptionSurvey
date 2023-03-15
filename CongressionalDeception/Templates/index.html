@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block main %}
+<div id="content" class="main layout-2-col-left">
+    <div id="content1">
+        <h2>
+            Welcome to the survey
+        </h2>
+        <p>
+            This is a survey that aims to crowd-source the labelling of a public speech data set. 
+            <br><br>
+            Please go ahead and answer the captcha below and press next to get started with the survey.
+        </p>
+        <br><br>
+        <form method="post">
+            {{ form.guid }}
+            {{ recaptcha }}
+            <br>
+            {{ form.submit(class_="button") }}
+        </form>
+        <p>{{ message }}</p>
+    </div>
+</div>
+{% endblock %}
