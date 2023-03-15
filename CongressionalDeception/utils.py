@@ -79,7 +79,7 @@ def createSurvey(guid,turker):
     session = {
         'turker':turker,
         'session':guid,
-        'isFinished':True
+        'isFinished':False
     }
     turkers.insert_one(session)
 
