@@ -8,9 +8,11 @@ Prerequisites: we need to have Python3, Flask, Flask-WTF and WTForms installed.
 
 ```
 $ brew install python3
-$ pip3 install Flask
-$ pip3 install Flask_WTF
+$ pip3 install flask
+$ pip3 install flask-wtf
 $ pip3 install WTForms
+$ pip3 install pymongo
+$ pip3 install flask-recaptcha
 ```
 
 To run it: Open Terminal and navigate to the CongressionalDeception folder and type:
