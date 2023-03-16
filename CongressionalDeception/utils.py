@@ -94,7 +94,9 @@ def updateSurvey(guid,id,choiceD,choiceC):
 #Getting the Question and witness for a given question 
 def getConvo(guid,id):
     survey = surveys.find_one({'turker':getTurker(guid)})
-    return survey['convo'][id]['question'],survey['convo'][id]['witness']
+    convID = survey['convo'][id]['convID']
+    conversation = conversations.find_one({'convID':convID})
+    return conversation['question'],conversation['witness']
 
 #Getting the expected response for a given question 
 def getExpectedResponse(guid,id):
@@ -116,7 +118,7 @@ def writeLog(element,guid,page,id):
     log = {
         'turker':getTurker(guid),
         'page' : page,
-        'id' : id,
+        'convo' : id,
         'element' : element,
         'timestamp' : str(datetime.utcnow().timestamp())
     }
