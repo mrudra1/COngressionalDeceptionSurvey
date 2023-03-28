@@ -89,14 +89,15 @@ def updateSurvey(guid,id,choiceD,choiceC):
     survey['convo'][id]['deceptionChoice'] = choiceD
     survey['convo'][id]['confidenceChoice'] = choiceC
     survey['convo'][id]['timestamp'] = str(datetime.utcnow().timestamp())
-    surveys.update_one({'turker':survey['turker']},{'$set':{'convo':survey['convo'],'lastConvo':id+1}})
+    next = id + 1
+    surveys.update_one({'turker':survey['turker']},{'$set':{'convo':survey['convo'],'lastConvo':next}})
 
 #Getting the Question and witness for a given question 
 def getConvo(guid,id):
     survey = surveys.find_one({'turker':getTurker(guid)})
     convID = survey['convo'][id]['convID']
     conversation = conversations.find_one({'convID':convID})
-    return conversation['question'],conversation['witness']
+    return conversation['question'],conversation['witness'],conversation['topic'],conversation['committees'],conversation['session'],conversation['permalink']
 
 #Getting the expected response for a given question 
 def getExpectedResponse(guid,id):

@@ -45,7 +45,7 @@ def tutorial(id,guid):
     if id > utils.getLastConvo(guid):
         return redirect(utils.getPage(utils.getTurker(guid)))
 
-    question, witness = utils.getConvo(guid,id)
+    question, witness, topic, committees, session, permalink = utils.getConvo(guid,id)
     form = SurveyForm()
     message1 = ''
     message2 = ''
@@ -65,15 +65,16 @@ def tutorial(id,guid):
             return redirect(url_for('previous', id=id, guid=guid))
 
         #if next
-        if int(form.deception.data) in expectedResponses:
+        if int(form.deception.data) in expectedResponses or utils.getDeception(guid,id):
             utils.updateSurvey(guid,id,form.deception.data,form.confidence.data)
             if id < 2 :
                 url = '/tutorial/id='+str(id+1)+'&guid='+guid
                 return redirect(location=url)
             else:
                 return redirect(location='/survey/id='+str(id+1)+'&guid='+guid)
-        else:   
-            message1 = 'Are you sure you made the right choice? Are you convinced by the response of the witness in the above conversation?'
+        else:
+            utils.updateSurvey(guid,id,form.deception.data,form.confidence.data)   
+            message1 = 'Above is an example of a known case where the witness had not been truthful. <br> Are you convinced by the response of the witness in the above conversation?'
     
     if form.previous.data:
             #print('\ndetected previous\n')
@@ -86,7 +87,7 @@ def tutorial(id,guid):
         if not form.confidence.data:
             message2 = 'Please ensure you have made a choice'
 
-    return render_template('tutorial.html', question=question, witness=witness, form=form, id=id,guid=guid, message1=message1, message2=message2)
+    return render_template('tutorial.html', question=question, witness=witness, form=form, id=id,guid=guid, message1=message1, message2=message2, permalink=permalink, session=session, committees=committees, topic=topic)
 
 @app.route('/previous/<int:id>&guid=<string:guid>', methods = ['GET','POST'])
 def previous(id,guid):
@@ -104,7 +105,7 @@ def showSurvey(id,guid):
     if id > utils.getLastConvo(guid):
         return redirect(utils.getPage(utils.getTurker(guid)))
     
-    question, witness = utils.getConvo(guid,id)
+    question, witness, topic, committees, session, permalink = utils.getConvo(guid,id)
     form = SurveyForm()
     message1 = ''
     message2 = ''
@@ -141,7 +142,7 @@ def showSurvey(id,guid):
         if not form.confidence.data:
             message2 = 'Please ensure you have made a choice'
 
-    return render_template('survey.html', question=question, witness=witness, form=form, id=id,guid=guid, message1=message1, message2=message2)
+    return render_template('survey.html', question=question, witness=witness, form=form, id=id,guid=guid, message1=message1, message2=message2, permalink=permalink, session=session, committees=committees, topic=topic)
 
 @app.route('/ThankYou')
 def ThankYou():

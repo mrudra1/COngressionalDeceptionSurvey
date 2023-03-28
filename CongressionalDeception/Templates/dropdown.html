@@ -46,6 +46,22 @@
   </ol>
   </p>
 </div>
+<button type="button" class="collapsible">{{session}}</button>
+<div class="content">
+  <dl>
+    <dt>Topic:</dt><dd>{{topic}}</dd>
+    <dt>Committees:</dt>
+    <dd>
+      <ul id = committees>
+        {% for item in committees %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </dd>
+    <dt>Session:</dt><dd><a href="{{permalink}}" target="_blank" rel="noopener noreferrer">{{session}}</a></dd>
+  </dl>
+  
+</div>
 
 <script>
   var coll = document.getElementsByClassName("collapsible");
