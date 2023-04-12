@@ -6748,7 +6748,7 @@ body {
 }
 
 #site-header #site-title {
-    width: 100%
+    width: 20%
 }
 
 @media print,
@@ -6766,7 +6766,7 @@ screen and (min-width:40em) {
     background-color: transparent;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: left center;
+    background-position: right center;
     border: 0;
     font: 0/0 a;
     text-shadow: none;
@@ -6784,7 +6784,7 @@ screen and (min-width:32.5em) {
         background-color: transparent;
         background-size: contain;
         background-repeat: no-repeat;
-        background-position: left center;
+        background-position: right center;
         border: 0;
         font: 0/0 a;
         text-shadow: none;

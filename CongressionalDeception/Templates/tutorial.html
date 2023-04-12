@@ -3,6 +3,14 @@
 {% with session=session, topic=topic, committees=committees, permalink=permalink %}
     {% include "dropdown.html" %}
 {% endwith %}
+<style>
+    .alert{
+        padding: 10px;
+        background-color: #87CEEB;
+        color: white;
+    }
+</style>
+
 <div id="content" class="main layout-2-col-left">
     <div id="content1">
         <h2>Tutorial page {{ id+1 }} of 3</h2>
@@ -13,7 +21,7 @@
             {{ form.logFeild }}
             <table>
                 <tr>
-                    <td colspan="5">{{ message1 }}</td>
+                    <td colspan="5">{% if message1 %}<p class="alert">{{ message1 }}</p>{% endif %}</td>
                 </tr>
                 <tr>
                     <td colspan="5"><b>Do you think there is deception occuring on the part of the witness?</b></td>
@@ -24,13 +32,18 @@
             </table>
             <table>
                 <tr>
-                    <td colspan="5">{{ message2 }}</td>
+                    <td colspan="5">{% if message2 %}<p class="alert">{{ message2 }}</p>{% endif %}</td>
                 </tr>
                 <tr>
                     <td colspan="5"><b>How confident are you in the above answer?</b></td>
                 </tr>
                 <tr align="center">
                     {{ form.confidence }}
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td colspan="5">{% if message %}<p class="alert">{{ message }}</p>{% endif %}</td>
                 </tr>
             </table>
             <table>
@@ -43,7 +56,6 @@
                     <td colspan="2" align="right">{{ form.submit(class_="button") }}</td>
                 </tr>
             </table>
-            {{ message }}
         </form>
     </div>
 </div>

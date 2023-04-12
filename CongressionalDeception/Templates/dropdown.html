@@ -1,38 +1,54 @@
 <style>
-  /* Style the button that is used to open and close the collapsible content */
-  .collapsible {
-    background-color: #005A43;
-    color: white;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 20px;
-  }
+  /* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #005A43;
+  background-color: #005A43;
+}
 
-  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-  .active,
-  .collapsible:hover {
-    background-color: #6CC24A;
-  }
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
 
-  /* Style the collapsible content. Note: hidden by default */
-  .content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #DEDEDE;
-    color: #000;
-  }
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #6CC24A;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #6CC24A;
+}
+
+/* Style the tab content */
+.tabcontent {
+  background-color: #DEDEDE;
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
 </style>
 
-<button type="button" class="collapsible">Definition</button>
-<div class="content">
-  <h3>
+<!-- Tab links -->
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Definition')">Definition</button>
+  <button class="tablinks" onclick="openTab(event, 'Details')">Details</button>
+</div>
+
+<!-- Tab content -->
+<div id="Definition" class="tabcontent">
+  <h4>
     What is deception?
-  </h3>
+  </h4>
   <p>
     <b>"Deception occurs when communicators control the information contained in their messages to convey a meaning that
       departs from the truth as they know it".</b>
@@ -46,36 +62,46 @@
   </ol>
   </p>
 </div>
-<button type="button" class="collapsible">{{session}}</button>
-<div class="content">
-  <dl>
-    <dt>Topic:</dt><dd>{{topic}}</dd>
-    <dt>Committees:</dt>
-    <dd>
-      <ul id = committees>
-        {% for item in committees %}
-          <li>{{ item }}</li>
-        {% endfor %}
-      </ul>
-    </dd>
-    <dt>Session:</dt><dd><a href="{{permalink}}" target="_blank" rel="noopener noreferrer">{{session}}</a></dd>
-  </dl>
-  
+
+<div id="Details" class="tabcontent">
+  <a href="{{permalink}}" target="_blank" rel="noopener noreferrer"><u>Link to Session</u></a>
+  <br><br>
+  <h5>Topic: </h5>{{topic}}
+  <br><br>
+  <h5>Committees: </h5>
+    <ul id = committees>
+      {% for item in committees %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
 </div>
 
 <script>
-  var coll = document.getElementsByClassName("collapsible");
-  var i;
+  function openTab(evt, tabName) {
+  // Declare all variables
+  var i, tabcontent, tablinks, flag = true;
 
-  for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-      this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
-    });
+  if(evt.currentTarget.className.includes(" active")){
+    flag = false;
   }
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  if (flag){
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+  }
+
+}
 </script>

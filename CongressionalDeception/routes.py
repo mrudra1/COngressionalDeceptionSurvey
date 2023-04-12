@@ -49,6 +49,7 @@ def tutorial(id,guid):
     form = SurveyForm()
     message1 = ''
     message2 = ''
+    message = ''
     expectedResponses = utils.getExpectedResponse(guid,id)
     
     if not form.deception.data:
@@ -74,7 +75,7 @@ def tutorial(id,guid):
                 return redirect(location='/survey/id='+str(id+1)+'&guid='+guid)
         else:
             utils.updateSurvey(guid,id,form.deception.data,form.confidence.data)   
-            message1 = 'Above is an example of a known case where the witness had not been truthful. <br> Are you convinced by the response of the witness in the above conversation?'
+            message = 'Attention! Above is an example of a known case where the witness had not been truthful. Are you convinced by the response of the witness in the above conversation?'
     
     if form.previous.data:
             #print('\ndetected previous\n')
@@ -87,7 +88,7 @@ def tutorial(id,guid):
         if not form.confidence.data:
             message2 = 'Please ensure you have made a choice'
 
-    return render_template('tutorial.html', question=question, witness=witness, form=form, id=id,guid=guid, message1=message1, message2=message2, permalink=permalink, session=session, committees=committees, topic=topic)
+    return render_template('tutorial.html', question=question, witness=witness, form=form, id=id,guid=guid, message1=message1, message2=message2, message = message, permalink=permalink, session=session, committees=committees, topic=topic)
 
 @app.route('/previous/<int:id>&guid=<string:guid>', methods = ['GET','POST'])
 def previous(id,guid):

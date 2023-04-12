@@ -1,0 +1,81 @@
+<style>
+  /* Style the button that is used to open and close the collapsible content */
+  .collapsible {
+    background-color: #005A43;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 20px;
+  }
+
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active,
+  .collapsible:hover {
+    background-color: #6CC24A;
+  }
+
+  /* Style the collapsible content. Note: hidden by default */
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #DEDEDE;
+    color: #000;
+  }
+</style>
+
+<button type="button" class="collapsible">Definition</button>
+<div class="content">
+  <h3>
+    What is deception?
+  </h3>
+  <p>
+    <b>"Deception occurs when communicators control the information contained in their messages to convey a meaning that
+      departs from the truth as they know it".</b>
+    <br><br>As stated above, we can label a communication as deception if:
+  <ol>
+    <li>There is presence of <b>deliberate intent</b> to deceive</li>
+    <li>Communicator considers the information to be <b>untrue</b></li>
+    <li>It has a <b>purpose</b>, like, gain of esteem, respect, trust or material, or in order to evade judgement that
+      is negative and/or harms them or what they represent.</li>
+
+  </ol>
+  </p>
+</div>
+<button type="button" class="collapsible">{{session}}</button>
+<div class="content">
+  <dl>
+    <dt>Topic:</dt><dd>{{topic}}</dd>
+    <dt>Committees:</dt>
+    <dd>
+      <ul id = committees>
+        {% for item in committees %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </dd>
+    <dt>Session:</dt><dd><a href="{{permalink}}" target="_blank" rel="noopener noreferrer">{{session}}</a></dd>
+  </dl>
+  
+</div>
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+</script>
